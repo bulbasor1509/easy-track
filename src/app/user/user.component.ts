@@ -1,13 +1,6 @@
-import {Component, computed, input, Input, output, signal} from '@angular/core';
-import {DUMMY_USERS} from '../users';
+import {Component, computed, input, output} from '@angular/core';
+import {UserType} from '../types';
 
-interface UserType {
-    id: string
-    avatar: string
-    name: string
-}
-
-const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length)
 
 @Component({
     selector: 'app-user',
