@@ -1,6 +1,12 @@
 import {Component, computed, input, Input, output, signal} from '@angular/core';
 import {DUMMY_USERS} from '../users';
 
+interface UserType {
+    id: string
+    avatar: string
+    name: string
+}
+
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length)
 
 @Component({
@@ -10,13 +16,11 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length)
     styleUrl: './user.component.css'
 })
 export class UserComponent {
-    id = input.required<string>();
-    avatar = input.required<string>();
-    name = input.required<string>();
-    imagePath = computed(() => "assets/users/" + this.avatar());
+    user = input.required<UserType>();
+    imagePath = computed(() => "assets/users/" + this.user().avatar);
     selectedUser = output<string>();
 
     onSelectUser(){
-        this.selectedUser.emit(this.id())
+        this.selectedUser.emit(this.user().id)
     }
 }
