@@ -11,3 +11,5 @@ export interface TaskType{
     summary: string
     dueDate: string
 }
+
+export type OutputTaskType = Omit<TaskType, "id" | "userId">
