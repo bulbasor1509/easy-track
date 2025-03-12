@@ -1,18 +1,20 @@
-import {Component, input} from '@angular/core';
+import {Component, input, output, signal} from '@angular/core';
 import {TaskComponent} from './task/task.component';
-import {UserType} from '../types';
 import {DUMMY_USERS} from '../users';
+import {NewTaskComponent} from './new-task/new-task.component';
 
 @Component({
-  selector: 'app-tasks',
+    selector: 'app-tasks',
     imports: [
-        TaskComponent
+        TaskComponent,
+        NewTaskComponent
     ],
-  templateUrl: './tasks.component.html',
-  styleUrl: './tasks.component.css'
+    templateUrl: './tasks.component.html',
+    styleUrl: './tasks.component.css'
 })
 export class TasksComponent {
     userId = input.required<string>();
+    addTaskBtn = signal<boolean>(false);
     tasks = [
         {
             id: 't1',
@@ -46,5 +48,17 @@ export class TasksComponent {
 
     get userTasks(){
         return this.tasks.filter(task => task.userId === this.userId())
+    }
+
+    onTaskComplete(taskId: string){
+        this.tasks = this.tasks.filter(task => task.id !== taskId)
+    }
+
+    onPopupClosed(){
+        this.addTaskBtn.set(false);
+    }
+
+    showAddTask(){
+        this.addTaskBtn.set(true)
     }
 }

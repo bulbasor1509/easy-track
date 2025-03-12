@@ -10,6 +10,7 @@ import {UserType} from '../types';
 })
 export class UserComponent {
     user = input.required<UserType>();
+    selected = input.required<boolean>();
     imagePath = computed(() => "assets/users/" + this.user().avatar);
     selectedUser = output<string>();
 
