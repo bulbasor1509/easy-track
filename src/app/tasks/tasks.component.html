@@ -1,21 +1,27 @@
-<section id="tasks">
-    <header>
-       <h2>{{userName}}'s Tasks</h2>
-        <menu>
-            <button>Add Task</button>
-        </menu>
-    </header>
-    <ul>
-        @if (userTasks.length){
-            @for (task of userTasks; track task.id){
+
+
+@if (addTaskBtn()){
+    <app-new-task (isClosed)="onPopupClosed()"/>
+} @else {
+    <section id="tasks">
+        <header>
+            <h2>{{userName}}'s Tasks</h2>
+            <menu>
+                <button (click)="showAddTask()">Add Task</button>
+            </menu>
+        </header>
+        <ul>
+            @if (userTasks.length){
+                @for (task of userTasks; track task.id){
+                    <li>
+                        <app-task [task]="task" (completedTask)="onTaskComplete($event)"/>
+                    </li>
+                }
+            } @else {
                 <li>
-                    <app-task [task]="task" (completedTask)="onTaskComplete($event)"/>
+                    No tasks
                 </li>
             }
-        } @else {
-            <li>
-                No tasks
-            </li>
-        }
-    </ul>
-</section>
+        </ul>
+    </section>
+}
