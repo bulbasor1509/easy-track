@@ -9,7 +9,7 @@
         @if (userTasks.length){
             @for (task of userTasks; track task.id){
                 <li>
-                    <app-task [task]="task"/>
+                    <app-task [task]="task" (completedTask)="onTaskComplete($event)"/>
                 </li>
             }
         } @else {
