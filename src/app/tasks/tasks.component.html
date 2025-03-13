@@ -1,7 +1,7 @@
 
 
 @if (addTaskBtn()){
-    <app-new-task (isClosed)="onPopupClosed()"  (enteredTask)="onAppendTask($event)"/>
+    <app-new-task [userId]="userId()" (close)="onPopupClosed()"  (enteredTask)="onAppendTask($event)"/>
 } @else {
     <section id="tasks">
         <header>
